@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 自己封装
+
+        // 1. 写好未封装的代码，没有错误
+        
+        /* var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/time');
+        xhr.send(null);
+        xhr.onload = function () {
+            console.log(this.response);
+        } */
+
+
+
+
+        // 2. 写一个function，将代码放到function里面
+        /* function ajax() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/time');
+            xhr.send(null);
+            xhr.onload = function () {
+                console.log(this.response);
+            }
+        }
+
+        ajax(); */
+        // 封装的函数有很多缺点
+            // 只能发送GET方式的请求
+            // 只能向time接口发送请求
+            // 没有考虑参数的问题
+
+
+        // 3. 为函数设置形参
+        /**
+         * type 请求的类型，可以是GET或POST
+         * url  接口地址
+         * data 发送给服务器的数据，请求参数
+         */
+        function ajax(type, url, data) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(type, url);
+            xhr.send(null);
+            xhr.onload = function () {
+                console.log(this.response);
+            }
+        }
+
+        ajax();
+        // 4. [优化代码]
+    </script>
+</body>
+
+</html>

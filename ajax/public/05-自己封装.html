@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 3. 为函数设置形参
+        /**
+         * type 请求的类型，可以是GET或POST
+         * url  接口地址
+         * data 发送给服务器的数据，请求参数
+         * fn   表示处理服务器返回结果的函数
+         */
+        function ajax(type, url, data, fn) {
+            var xhr = new XMLHttpRequest();
+           
+            // 分为GET和POST两种情况
+            if (type === 'GET') {
+                xhr.open(type, url + '?' + data);
+                xhr.send(null);
+            } else if (type === 'POST') {
+                xhr.open(type, url);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send(data);
+            }
+
+            xhr.onload = function () {
+                fn(this.response); // 等待服务器返回结果，当返回了结果之后，把结果传递给chuli函数
+            }
+        }
+
+        /* function chuli (r) {
+            console.log(r);
+            // document.body.innerHTML = r;
+        } */
+
+        // $.get('/time', 'id=11', function () {});
+
+        ajax('GET', '/time', 'id=111&age=222', function (r) {
+            document.body.innerHTML = r;
+        });
+
+        ajax('POST', '/query-post', 'id=111&age=222', function (r) {
+            console.log(r);
+            // document.body.innerHTML = r;
+        });
+
+    </script>
+</body>
+
+</html>
